@@ -97,19 +97,19 @@ jobs:
 
       - name: Get Other Caches from versions.json
         id: gocv
-        uses: hwhsu1231/ci-sphinx/.github/actions/get-other-caches-from-versions-file@main
+        uses: ltdorgtest/ci-sphinx/.github/actions/get-other-caches-from-versions-file@main
         with:
           version: ${{ inputs.VERSION }}
           versions-file: 'versions.json'
 
       - name: Install CMake
-        uses: hwhsu1231/ci-sphinx/.github/actions/install-cmake@main
+        uses: ltdorgtest/ci-sphinx/.github/actions/install-cmake@main
 
       - name: Install Gettext
-        uses: hwhsu1231/ci-sphinx/.github/actions/install-gettext@main
+        uses: ltdorgtest/ci-sphinx/.github/actions/install-gettext@main
 
       - name: Configure the '${{ inputs.LANGUAGE }}' preset for '${{ inputs.VERSION }}' version
-        uses: hwhsu1231/ci-sphinx/.github/actions/cmake-configure-preset@main
+        uses: ltdorgtest/ci-sphinx/.github/actions/cmake-configure-preset@main
         with:
           source-directory: ${{ github.workspace }}
           preset: ${{ inputs.LANGUAGE }}
@@ -118,7 +118,7 @@ jobs:
           cache-auto-depend: 'OFF'
 
       - name: Build the 'gettext_compend_po' target
-        uses: hwhsu1231/ci-sphinx/.github/actions/cmake-build-target@main
+        uses: ltdorgtest/ci-sphinx/.github/actions/cmake-build-target@main
         with:
           source-directory: ${{ github.workspace }}
           preset: ${{ inputs.LANGUAGE }}
