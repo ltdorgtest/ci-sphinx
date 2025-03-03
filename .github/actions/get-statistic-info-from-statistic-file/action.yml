@@ -1,0 +1,44 @@
+# Distributed under the OSI-approved BSD 3-Clause License.
+# See accompanying file LICENSE.txt for details.
+
+name: get-statistic-info-from-statistic-file
+
+description: Get the Statistic Information from statistic.txt.
+
+inputs:
+  version:
+    required: true  # [required]
+    description: >
+      The version identifier used to locate the corresponding `statistic.txt` file.
+  working-directory:
+    required: false
+    default: '${{ github.workspace }}'
+    description: >
+      The directory from which to run commands or locate files. Defaults to '\$\{\{ github.workspace \}\}'. Defaults to '\$\{\{ github.workspace \}\}'.
+
+outputs:
+  STATISTIC_INFO:
+    value: ${{ steps.gsi.outputs.STATISTIC_INFO }}
+    description: >
+      The content of the `statistic.txt` file for the specified version.
+
+runs:
+  using: composite
+  steps:
+    - name: Get the Statistic Information from statistic.txt
+      id: gsi
+      shell: bash
+      run: |
+        VERSION="${{ inputs.version }}"
+        WORKING_DIRECTORY=$(echo "${{ inputs.working-directory }}" | sed 's#\\#/#g' | sed 's#^\([A-Za-z]\):#/\L\1#')
+
+        cd "${WORKING_DIRECTORY}"
+
+        STATISTIC_TXT_PATH=l10n/${VERSION}/statistic.txt
+        DELIMITER="$(openssl rand -hex 8)"
+        echo "STATISTIC_INFO<<${DELIMITER}" >> ${GITHUB_OUTPUT}
+        echo "$(<${STATISTIC_TXT_PATH})"    >> ${GITHUB_OUTPUT}
+        echo "${DELIMITER}"                 >> ${GITHUB_OUTPUT}
+
+        echo "STATISTIC_INFO:"
+        echo "$(<${STATISTIC_TXT_PATH})"

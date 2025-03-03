@@ -1,0 +1,173 @@
+# Distributed under the OSI-approved BSD 3-Clause License.
+# See accompanying file LICENSE.txt for details.
+
+name: use-gettext-statistic-po
+
+on:
+  workflow_call:
+    inputs:
+      RUNNER:
+        type: string
+        required: true
+        description: >
+          The runner image for executing the job (e.g., 'ubuntu-latest').
+      CHECKOUT:
+        type: string
+        required: true
+        description: >
+          The git reference to be checked out (e.g., '\$\{\{ github.ref \}\}').
+      VERSION:
+        type: string
+        required: true
+        description: >
+          The version of the documentation.
+      CALLER_JOB:
+        type: string
+        required: true
+        description: >
+          The name of the caller job.
+      ENABLE_JOB:
+        type: string
+        required: true
+        description: >
+          Whether to enable the job (e.g., 'true' and 'false').
+      ACTOR_NAME:
+        type: string
+        required: true
+        description: >
+          The user name of the GitHub actor.
+      ACTOR_EMAIL:
+        required: true
+        type: string
+        description: >
+          The user email of the GitHub actor.
+    secrets:
+      ACTOR_GITHUB_TOKEN:
+        required: true
+        description: >
+          The personal access token of the GitHub actor.
+
+jobs:
+  gettext-statistic-po:
+    if: ${{ inputs.ENABLE_JOB == 'true' }}
+    runs-on: ${{ inputs.RUNNER }}
+    steps:
+      - name: Print Contexts/Inputs/Secrets
+        shell: bash
+        run: |
+          echo "[Contexts]"
+          echo "github.job = ${{ github.job }}"
+          echo "github.ref = ${{ github.ref }}"
+          echo "github.ref_name = ${{ github.ref_name }}"
+          echo "github.event_name = ${{ github.event_name }}"
+          echo "github.event.action = ${{ github.event.action }}"
+          echo "github.event.number = ${{ github.event.number }}"
+          echo "github.workflow = ${{ github.workflow }}"
+          echo "github.workflow_ref = ${{ github.workflow_ref }}"
+          echo "github.run_id = ${{ github.run_id }}"
+          echo "github.run_number = ${{ github.run_number }}"
+          echo "github.run_attempt = ${{ github.run_attempt }}"
+          echo "github.server_url = ${{ github.server_url }}"
+          echo "github.repository = ${{ github.repository }}"
+          echo "github.workspace = ${{ github.workspace }}"
+          echo "[Inputs]"
+          echo "inputs.RUNNER = ${{ inputs.RUNNER }}"
+          echo "inputs.CHECKOUT = ${{ inputs.CHECKOUT }}"
+          echo "inputs.VERSION = ${{ inputs.VERSION }}"
+          echo "inputs.CALLER_JOB = ${{ inputs.CALLER_JOB }}"
+          echo "inputs.ENABLE_JOB = ${{ inputs.ENABLE_JOB }}"
+          echo "inputs.ACTOR_NAME = ${{ inputs.ACTOR_NAME }}"
+          echo "inputs.ACTOR_EMAIL = ${{ inputs.ACTOR_EMAIL }}"
+          echo "[Secrets]"
+          echo "secrets.ACTOR_GITHUB_TOKEN = ${{ secrets.ACTOR_GITHUB_TOKEN }}"
+
+      - name: Checkout to '${{ inputs.CHECKOUT }}'
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.CHECKOUT }}
+          token: ${{ secrets.ACTOR_GITHUB_TOKEN }}
+          submodules: true
+          fetch-depth: 0
+
+      - name: Install CMake
+        uses: hwhsu1231/ci-sphinx/.github/actions/install-cmake@main
+
+      - name: Install Gettext
+        uses: hwhsu1231/ci-sphinx/.github/actions/install-gettext@main
+
+      - name: Get Other Caches from versions.json
+        id: gocv
+        uses: hwhsu1231/ci-sphinx/.github/actions/get-other-caches-from-versions-file@main
+        with:
+          version: ${{ inputs.VERSION }}
+          versions-file: 'versions.json'
+
+      - name: Configure the 'all' preset for '${{ inputs.VERSION }}' version
+        uses: hwhsu1231/ci-sphinx/.github/actions/cmake-configure-preset@main
+        with:
+          source-directory: ${{ github.workspace }}
+          preset: 'all'
+          cache-version: ${{ inputs.VERSION }}
+          cache-version-compendium: ${{ steps.gocv.outputs.VERSION_COMPENDIUM }}
+          cache-auto-depend: 'OFF'
+
+      - name: Build the 'gettext_statistic_po' target
+        uses: hwhsu1231/ci-sphinx/.github/actions/cmake-build-target@main
+        with:
+          source-directory: ${{ github.workspace }}
+          preset: 'all'
+          target: 'gettext_statistic_po'
+
+      - name: Get the Statistic Information from statistic.txt
+        id: gsi
+        uses: hwhsu1231/ci-sphinx/.github/actions/get-statistic-info-from-statistic-file@main
+        with:
+          version: ${{ inputs.VERSION }}
+
+      - name: Get the Current Job's ID
+        id: gcji
+        uses: Tiryoh/gha-jobid-action@v1
+        with:
+          github_token: ${{ secrets.ACTOR_GITHUB_TOKEN }}
+          job_name: '${{ inputs.CALLER_JOB }} / ${{ github.job }}'
+          per_page: 100
+
+      - name: Check Outputs of the Current Job's ID
+        run: |
+          echo "Current Job's URL = ${{ steps.gcji.outputs.html_url }}"
+          echo "Current Job's ID  = ${{ steps.gcji.outputs.job_id }}"
+
+      - name: Set up mutex for '${{ github.ref_name }}' branch
+        uses: ben-z/gh-action-mutex@v1.0.0-alpha.9
+        with:
+          branch: 'mutex/${{ github.ref_name }}'
+          repo-token: ${{ secrets.ACTOR_GITHUB_TOKEN }}
+
+      # https://stackoverflow.com/a/74071223/16265240
+      - name: Add and Commit Changes
+        id: acc
+        uses: EndBug/add-and-commit@v9
+        with:
+          cwd: './l10n'
+          add: './${{ inputs.VERSION }}'
+          pull: '--rebase --autostash'  # required 'actions/checkout' with 'fetch-depth: 0'
+          commit: '--signoff'
+          author_name: ${{ inputs.ACTOR_NAME }}
+          author_email: ${{ inputs.ACTOR_EMAIL }}
+          message: |
+            chore(${{ inputs.VERSION }}): update statistic info from Gettext
+
+            ${{ steps.gsi.outputs.STATISTIC_INFO }}
+
+            Created by the GitHub Workflow:
+
+            - File: ${{ github.server_url }}/${{ github.repository }}/actions/workflows/${{ github.workflow }}.yml
+            - Run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+            - Job: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}/job/${{ steps.gcji.outputs.job_id }}
+
+      - name: Check Outputs of the Commit
+        if: ${{ steps.acc.outputs.committed == 'true' }}
+        shell: bash
+        run: |
+          echo "Commit's SHA = ${{ steps.acc.outputs.commit_long_sha }}"
+          echo "Commit's URL = ${{ github.server_url }}/${{ github.repository }}/commit/${{ steps.acc.outputs.commit_long_sha }}"
