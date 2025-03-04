@@ -175,9 +175,9 @@ jobs:
           author_name: ${{ inputs.ACTOR_NAME }}
           author_email: ${{ inputs.ACTOR_EMAIL }}
           message: |
-            po(${{ inputs.VERSION }}): update po from Gettext
+            🌐 po(${{ inputs.VERSION }}): update .po from Gettext
 
-            Update .po files from Gettext.
+            Updated .po files from Gettext.
 
             Before: ${{ steps.po-before.outputs.VERSION_REFERENCE }}
             After: ${{ steps.po-after.outputs.VERSION_REFERENCE }}

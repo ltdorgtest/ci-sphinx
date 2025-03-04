@@ -171,7 +171,7 @@ jobs:
           CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
           CROWDIN_BASE_URL: ${{ inputs.CROWDIN_BASE_URL }}
 
-      - name: Get the Crowdin Status Progress of the '${{ inputs.VERSION }}' branch
+      - name: Get CROWDIN_STATUS_PROGRESS of the '${{ inputs.VERSION }}' branch
         id: gtpp
         if: ${{ inputs.VERSION == 'readme' }}
         uses: ltdorgtest/ci-sphinx/.github/actions/get-crowdin-status-progress@main
@@ -212,7 +212,7 @@ jobs:
           author_name: ${{ inputs.ACTOR_NAME }}
           author_email: ${{ inputs.ACTOR_EMAIL }}
           message: |
-            tr(${{ inputs.VERSION }}): pull ${{ inputs.LANGUAGE }} translations from Crowdin
+            🌐 tr(${{ inputs.VERSION }}): download '${{ inputs.LANGUAGE }}' translations from Crowdin
 
             ${{ steps.gtpp.outputs.CROWDIN_STATUS_PROGRESS }}
 
