@@ -74,6 +74,7 @@ jobs:
           echo "github.event.number = ${{ github.event.number }}"
           echo "[Inputs]"
           echo "inputs.RUNNER = ${{ inputs.RUNNER }}"
+          echo "inputs.CHECKOUT = ${{ inputs.CHECKOUT }}"
           echo "inputs.VERSION = ${{ inputs.VERSION }}"
           echo "inputs.MODE_OF_UPDATE = ${{ inputs.MODE_OF_UPDATE }}"
           echo "inputs.CALLER_JOB = ${{ inputs.CALLER_JOB }}"
@@ -87,7 +88,7 @@ jobs:
       - name: Checkout to '${{ github.ref }}'
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.ref }}
+          ref: ${{ inputs.CHECKOUT }}
           token: ${{ secrets.ACTOR_GITHUB_TOKEN }}
           submodules: true
           fetch-depth: 0
