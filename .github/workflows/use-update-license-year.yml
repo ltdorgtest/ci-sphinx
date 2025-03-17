@@ -101,7 +101,7 @@ jobs:
           commitTitle: |
             📝 docs(license): update copyright year(s)
           commitBody: |
-            Updated the Copyright Year(s) to {{currentYear}}.
+            updated the Copyright Year(s) to {{currentYear}}.
           prTitle: |
             📝 docs(license): update copyright year(s)
           prBody: |
