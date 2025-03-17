@@ -99,7 +99,7 @@ jobs:
           commitAuthorName: ${{ inputs.ACTOR_NAME }}
           commitAuthorEmail: ${{ inputs.ACTOR_EMAIL }}
           commitTitle: |
-            📄 docs(license): update copyright year(s)
+            📝 docs(license): update copyright year(s)
           commitBody: |
             Updated the Copyright Year(s) to {{currentYear}}.
           prTitle: |
