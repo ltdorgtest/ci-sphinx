@@ -103,13 +103,13 @@ jobs:
           commitBody: |
             Updated the Copyright Year(s) to {{currentYear}}.
           prTitle: |
-            docs(license): update copyright year(s)
+            📝 docs(license): update copyright year(s)
           prBody: |
-            Created by the GitHub Workflow:
+            created by the GitHub Workflow:
 
-            - File: [${{ github.workflow }}](${{ github.server_url }}/${{ github.repository }}/actions/workflows/${{ github.workflow }}.yml)
-            - Run: [${{ github.workflow }}](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
-            - Job: [${{ inputs.CALLER_JOB }} / ${{ github.job }}](${{ steps.gcji.outputs.html_url }})
+            - file: [${{ github.workflow }}](${{ github.server_url }}/${{ github.repository }}/actions/workflows/${{ github.workflow }}.yml)
+            - run: [${{ github.workflow }}](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
+            - job: [${{ inputs.CALLER_JOB }} / ${{ github.job }}](${{ steps.gcji.outputs.html_url }})
 
       - name: Check Outputs of the Pull Request
         if: ${{ steps.ucyl.outputs.pullRequestNumber }}

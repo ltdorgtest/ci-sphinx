@@ -196,10 +196,10 @@ jobs:
           message: |
             🌐 pot(${{ inputs.VERSION }}): update .pot from Sphinx
 
-            Updated .pot files for '${{ inputs.VERSION }}' version from Sphinx.
+            updated .pot files for '${{ inputs.VERSION }}' version from Sphinx.
 
-            Before: ${{ steps.pot-before.outputs.VERSION_REFERENCE }}
-            After: ${{ steps.pot-after.outputs.VERSION_REFERENCE }}
+            before: ${{ steps.pot-before.outputs.VERSION_REFERENCE }}
+            after: ${{ steps.pot-after.outputs.VERSION_REFERENCE }}
 
       - name: Check Outputs of the Commit
         if: ${{ inputs.CREATE_PR == 'true' && steps.acc.outputs.committed == 'true' }}
@@ -220,11 +220,11 @@ jobs:
           title: |
             🌐 pot(${{ inputs.VERSION }}): update .pot from sphinx
           body: |
-            Created by the GitHub Workflow:
+            created by the GitHub Workflow:
 
-            - File: [${{ github.workflow }}](${{ github.server_url }}/${{ github.repository }}/actions/workflows/${{ github.workflow }}.yml)
-            - Run: [${{ github.workflow }}](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
-            - Job: [${{ inputs.CALLER_JOB }} / ${{ github.job }}](${{ steps.gcji.outputs.html_url }})
+            - file: [${{ github.workflow }}](${{ github.server_url }}/${{ github.repository }}/actions/workflows/${{ github.workflow }}.yml)
+            - run: [${{ github.workflow }}](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
+            - job: [${{ inputs.CALLER_JOB }} / ${{ github.job }}](${{ steps.gcji.outputs.html_url }})
 
       - name: Check Outputs of the Pull Request
         if: ${{ inputs.CREATE_PR == 'true' && steps.acc.outputs.committed == 'true' }}

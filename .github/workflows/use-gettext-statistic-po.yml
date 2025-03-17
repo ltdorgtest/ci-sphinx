@@ -159,11 +159,11 @@ jobs:
 
             ${{ steps.gsi.outputs.STATISTIC_INFO }}
 
-            Created by the GitHub Workflow:
+            created by the GitHub Workflow:
 
-            - File: ${{ github.server_url }}/${{ github.repository }}/actions/workflows/${{ github.workflow }}.yml
-            - Run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-            - Job: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}/job/${{ steps.gcji.outputs.job_id }}
+            - file: ${{ github.server_url }}/${{ github.repository }}/actions/workflows/${{ github.workflow }}.yml
+            - run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+            - job: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}/job/${{ steps.gcji.outputs.job_id }}
 
       - name: Check Outputs of the Commit
         if: ${{ steps.acc.outputs.committed == 'true' }}

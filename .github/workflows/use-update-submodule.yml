@@ -144,17 +144,17 @@ jobs:
           message: |
             ✨ feat: update submodule '${{ inputs.SUBMODULE }}'
 
-            Updated the submodule '${{ inputs.SUBMODULE }}' to its latest commit.
+            updated the submodule '${{ inputs.SUBMODULE }}' to its latest commit.
 
-            - Repository: ${{ steps.grus.outputs.REPO_URL }}
-            - Old commit: ${{ steps.gocs.outputs.OLD_COMMIT }}
-            - New commit: ${{ steps.gncs.outputs.NEW_COMMIT }}
+            - repository: ${{ steps.grus.outputs.REPO_URL }}
+            - old commit: ${{ steps.gocs.outputs.OLD_COMMIT }}
+            - new commit: ${{ steps.gncs.outputs.NEW_COMMIT }}
 
-            Created by the GitHub Workflow:
+            created by the GitHub Workflow:
 
-            - File: ${{ github.server_url }}/${{ github.repository }}/actions/workflows/${{ github.workflow }}.yml
-            - Run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-            - Job: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}/job/${{ steps.gcji.outputs.job_id }}
+            - file: ${{ github.server_url }}/${{ github.repository }}/actions/workflows/${{ github.workflow }}.yml
+            - run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+            - job: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}/job/${{ steps.gcji.outputs.job_id }}
 
       - name: Check Outputs of the Commit
         if: ${{ steps.acc.outputs.committed == 'true' }}
