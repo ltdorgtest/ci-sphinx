@@ -101,6 +101,11 @@ inputs:
     default: '[default]'
     description: >
       The value for the GETTEXT_ADDITIONAL_TARGETS cache entry.
+  working-directory:
+    required: false
+    default: '${{ github.workspace }}'
+    description: >
+      The directory from which to run commands or locate files. Defaults to '\$\{\{ github.workspace \}\}'.
 
 runs:
   using: composite
