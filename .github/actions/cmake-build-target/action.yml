@@ -3,7 +3,7 @@
 
 name: cmake-build-target
 
-description: Build the target with CMake
+description: Build the CMake Target
 
 inputs:
   build-directory:
@@ -58,13 +58,19 @@ runs:
         echo "CMAKE_ARGS:"
         echo "${CMAKE_ARGS[@]}"
 
-    - name: Configure the project
+    - name: Build CMake Target
       shell: bash
       run: |
         WORKING_DIRECTORY=$(echo "${{ inputs.working-directory }}" | sed 's#\\#/#g' | sed 's#^\([A-Za-z]\):#/\L\1#')
         CMAKE_ARGS="${{ steps.cmake-args.outputs.CMAKE_ARGS }}"
+
+        echo "Changing Directory..."
+        echo ""
+        echo "cd ${WORKING_DIRECTORY}"
+        echo ""
         cd "${WORKING_DIRECTORY}"
-        echo "Configuring the project..."
+
+        echo "Building CMake Target..."
         echo ""
         echo "cmake ${CMAKE_ARGS[@]}"
         echo ""
