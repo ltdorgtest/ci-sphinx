@@ -112,7 +112,7 @@ jobs:
       - name: Configure the 'all' preset for '${{ inputs.VERSION }}' version
         uses: ltdorgtest/ci-sphinx/.github/actions/cmake-configure-preset@main
         with:
-          source-directory: ${{ github.workspace }}
+          source-directory: .
           config-preset: 'all'
           cache-version: ${{ inputs.VERSION }}
           cache-version-compendium: ${{ steps.gocv.outputs.VERSION_COMPENDIUM }}
