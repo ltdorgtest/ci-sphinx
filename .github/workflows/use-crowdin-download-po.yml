@@ -149,7 +149,7 @@ jobs:
         with:
           source-directory: ${{ github.workspace }}
           preset: ${{ inputs.LANGUAGE }}
-          target: 'crowdin_download_po'
+          target: 'gettext_update_po'
 
       - name: Build the 'crowdin_download_po' target
         uses: ltdorgtest/ci-sphinx/.github/actions/cmake-build-target@main
