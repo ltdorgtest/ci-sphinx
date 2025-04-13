@@ -99,11 +99,11 @@ jobs:
           commitAuthorName: ${{ inputs.ACTOR_NAME }}
           commitAuthorEmail: ${{ inputs.ACTOR_EMAIL }}
           commitTitle: |
-            📝 docs(license): update copyright year(s)
+            :memo: docs(license): update copyright year(s)
           commitBody: |
-            updated the copyright year(s) to {{currentYear}}.
+            update the copyright year(s) to {{currentYear}}.
           prTitle: |
-            📝 docs(license): update copyright year(s)
+            :memo: docs(license): update copyright year(s)
           prBody: |
             created by the GitHub Workflow:
 
