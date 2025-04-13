@@ -113,9 +113,8 @@ jobs:
       - name: Build the 'gettext_statistic_po' target
         uses: ltdorgtest/ci-sphinx/.github/actions/cmake-build-target@main
         with:
-          source-directory: ${{ github.workspace }}
-          preset: 'all'
-          target: 'gettext_statistic_po'
+          build-directory: out/build/all
+          build-target: 'gettext_statistic_po'
 
       - name: Get the Statistic Information from statistic.txt
         id: gsi

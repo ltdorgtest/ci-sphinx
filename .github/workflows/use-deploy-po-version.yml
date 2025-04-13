@@ -100,9 +100,8 @@ jobs:
       - name: Build the 'create_rtd_symlinks' target
         uses: ltdorgtest/ci-sphinx/.github/actions/cmake-build-target@main
         with:
-          source-directory: ${{ github.workspace }}
-          preset: 'all'
-          target: 'create_rtd_symlinks'
+          build-directory: out/build/all
+          build-target: 'create_rtd_symlinks'
 
       - name: Remove 'l10n/${{ inputs.VERSION }}/locale/pot' directory
         run: |

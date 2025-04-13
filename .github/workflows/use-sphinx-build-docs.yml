@@ -142,37 +142,32 @@ jobs:
       - name: Build the 'prepare_repositories' target
         uses: ltdorgtest/ci-sphinx/.github/actions/cmake-build-target@main
         with:
-          source-directory: ${{ github.workspace }}
-          preset: ${{ inputs.LANGUAGE }}
-          target: 'prepare_repositories'
+          build-directory: out/build/${{ inputs.LANGUAGE }}
+          build-target: 'prepare_repositories'
 
       - name: Build the 'install_requirements' target
         uses: ltdorgtest/ci-sphinx/.github/actions/cmake-build-target@main
         with:
-          source-directory: ${{ github.workspace }}
-          preset: ${{ inputs.LANGUAGE }}
-          target: 'install_requirements'
+          build-directory: out/build/${{ inputs.LANGUAGE }}
+          build-target: 'install_requirements'
 
       - name: Build the 'sphinx_update_pot' target
         uses: ltdorgtest/ci-sphinx/.github/actions/cmake-build-target@main
         with:
-          source-directory: ${{ github.workspace }}
-          preset: ${{ inputs.LANGUAGE }}
-          target: 'sphinx_update_pot'
+          build-directory: out/build/${{ inputs.LANGUAGE }}
+          build-target: 'sphinx_update_pot'
 
       - name: Build the 'gettext_update_po' target
         uses: ltdorgtest/ci-sphinx/.github/actions/cmake-build-target@main
         with:
-          source-directory: ${{ github.workspace }}
-          preset: ${{ inputs.LANGUAGE }}
-          target: 'gettext_update_po'
+          build-directory: out/build/${{ inputs.LANGUAGE }}
+          build-target: 'gettext_update_po'
 
       - name: Build the 'sphinx_build_docs' target
         uses: ltdorgtest/ci-sphinx/.github/actions/cmake-build-target@main
         with:
-          source-directory: ${{ github.workspace }}
-          preset: ${{ inputs.LANGUAGE }}
-          target: 'sphinx_build_docs'
+          build-directory: out/build/${{ inputs.LANGUAGE }}
+          build-target: 'sphinx_build_docs'
 
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v4

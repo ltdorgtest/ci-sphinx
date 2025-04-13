@@ -119,9 +119,8 @@ jobs:
       - name: Build the 'gettext_compend_po' target
         uses: ltdorgtest/ci-sphinx/.github/actions/cmake-build-target@main
         with:
-          source-directory: ${{ github.workspace }}
-          preset: ${{ inputs.LANGUAGE }}
-          target: 'gettext_compend_po'
+          build-directory: out/build/${{ inputs.LANGUAGE }}
+          build-target: 'gettext_compend_po'
 
       - name: Get the Current Job's ID
         id: gcji

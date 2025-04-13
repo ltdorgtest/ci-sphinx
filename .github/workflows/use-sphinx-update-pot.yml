@@ -128,23 +128,20 @@ jobs:
       - name: Build the 'prepare_repositories' target
         uses: ltdorgtest/ci-sphinx/.github/actions/cmake-build-target@main
         with:
-          source-directory: ${{ github.workspace }}
-          preset: 'all'
-          target: 'prepare_repositories'
+          build-directory: out/build/all
+          build-target: 'prepare_repositories'
 
       - name: Build the 'install_requirements' target
         uses: ltdorgtest/ci-sphinx/.github/actions/cmake-build-target@main
         with:
-          source-directory: ${{ github.workspace }}
-          preset: 'all'
-          target: 'install_requirements'
+          build-directory: out/build/all
+          build-target: 'install_requirements'
 
       - name: Build the 'sphinx_update_pot' target
         uses: ltdorgtest/ci-sphinx/.github/actions/cmake-build-target@main
         with:
-          source-directory: ${{ github.workspace }}
-          preset: 'all'
-          target: 'sphinx_update_pot'
+          build-directory: out/build/all
+          build-target: 'sphinx_update_pot'
 
       - name: Get VERSION_REFERENCE of '.pot' After Building
         id: pot-after
