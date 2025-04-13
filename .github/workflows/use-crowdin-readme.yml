@@ -212,7 +212,7 @@ jobs:
           author_name: ${{ inputs.ACTOR_NAME }}
           author_email: ${{ inputs.ACTOR_EMAIL }}
           message: |
-            :globe_with_meridians: tr(${{ inputs.VERSION }}): download '${{ inputs.LANGUAGE }}' translations from Crowdin
+            🌐 tr(${{ inputs.VERSION }}): download '${{ inputs.LANGUAGE }}' translations from Crowdin
 
             ${{ steps.gtpp.outputs.CROWDIN_STATUS_PROGRESS }}
 
