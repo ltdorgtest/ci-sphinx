@@ -111,7 +111,6 @@ jobs:
       - name: Configure the '${{ inputs.LANGUAGE }}' preset for '${{ inputs.VERSION }}' version
         uses: ltdorgtest/ci-sphinx/.github/actions/cmake-configure-preset@main
         with:
-          source-directory: ${{ github.workspace }}
           config-preset: ${{ inputs.LANGUAGE }}
           cache-version: ${{ inputs.VERSION }}
           cache-version-compendium: ${{ steps.gocv.outputs.VERSION_COMPENDIUM }}

@@ -8,7 +8,7 @@ description: Configure the CMake preset
 inputs:
   source-directory:
     required: false
-    default: '${{ github.workspace }}'
+    default: '.'
     description: >
       The source directory of the CMake project.
   config-preset:
