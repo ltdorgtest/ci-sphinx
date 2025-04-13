@@ -147,8 +147,9 @@ jobs:
       - name: Build the 'gettext_update_po' target
         uses: ltdorgtest/ci-sphinx/.github/actions/cmake-build-target@main
         with:
-          build-directory: out/build/${{ inputs.LANGUAGE }}
-          build-target: 'gettext_update_po'
+          source-directory: ${{ github.workspace }}
+          preset: ${{ inputs.LANGUAGE }}
+          target: 'crowdin_download_po'
 
       - name: Build the 'crowdin_download_po' target
         uses: ltdorgtest/ci-sphinx/.github/actions/cmake-build-target@main
