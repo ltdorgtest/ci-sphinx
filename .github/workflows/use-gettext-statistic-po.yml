@@ -153,7 +153,7 @@ jobs:
           author_name: ${{ inputs.ACTOR_NAME }}
           author_email: ${{ inputs.ACTOR_EMAIL }}
           message: |
-            🔧 chore(${{ inputs.VERSION }}): update statistic info from Gettext
+            :wrench: chore(${{ inputs.VERSION }}): update statistic info from Gettext
 
             ${{ steps.gsi.outputs.STATISTIC_INFO }}
 

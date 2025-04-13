@@ -142,9 +142,9 @@ jobs:
           author_name: ${{ inputs.ACTOR_NAME }}
           author_email: ${{ inputs.ACTOR_EMAIL }}
           message: |
-            ✨ feat: update submodule '${{ inputs.SUBMODULE }}'
+            :arrow_up: chore(${{ inputs.SUBMODULE }}): update submodule to latest
 
-            updated the submodule '${{ inputs.SUBMODULE }}' to its latest commit.
+            update the submodule '${{ inputs.SUBMODULE }}' to its latest commit.
 
             - repository: ${{ steps.grus.outputs.REPO_URL }}
             - old commit: ${{ steps.gocs.outputs.OLD_COMMIT }}
