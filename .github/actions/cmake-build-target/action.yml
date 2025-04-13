@@ -42,14 +42,14 @@ runs:
           VALUE=$(echo "${INPUTS_JSON}" | jq -r --arg key "${KEY}" '.[$key]')
           CMAKE_ARG=""
           if   [[ "${KEY}" == "build-directory" ]]; then
-            CMAKE_ARG="--build=${VALUE}"
+            CMAKE_ARG="--build ${VALUE}"
           elif [[ "${KEY}" == "build-target" ]]; then
             if [[ "${VALUE}" != "[default]" ]]; then
-              CMAKE_ARG="--target=${VALUE}"
+              CMAKE_ARG="--target ${VALUE}"
             fi
           elif [[ "${KEY}" == "build-jobs" ]]; then
             if [[ "${VALUE}" != "[default]" ]]; then
-              CMAKE_ARG="--parallel=${VALUE}"
+              CMAKE_ARG="--parallel ${VALUE}"
             fi
           fi
           CMAKE_ARGS+=($CMAKE_ARG)
