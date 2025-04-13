@@ -120,22 +120,22 @@ jobs:
 
       - name: Get Other Caches from versions.json
         id: gocv
-        uses: ltdorgtest/ci-sphinx/.github/actions/get-other-caches-from-versions-file@main
+        uses: ltdorgtest/ci-common/.github/actions/get-other-caches-from-versions-file@main
         with:
           version: ${{ inputs.VERSION }}
           versions-file: 'versions.json'
 
       - name: Install CMake
-        uses: ltdorgtest/ci-sphinx/.github/actions/install-cmake@main
+        uses: ltdorgtest/ci-common/.github/actions/install-cmake@main
 
       - name: Install Gettext
-        uses: ltdorgtest/ci-sphinx/.github/actions/install-gettext@main
+        uses: ltdorgtest/ci-common/.github/actions/install-gettext@main
 
       - name: Install Crowdin
-        uses: ltdorgtest/ci-sphinx/.github/actions/install-crowdin@main
+        uses: ltdorgtest/ci-common/.github/actions/install-crowdin@main
 
       - name: Configure the '${{ inputs.LANGUAGE }}' preset for '${{ inputs.VERSION }}' version
-        uses: ltdorgtest/ci-sphinx/.github/actions/cmake-configure-preset@main
+        uses: ltdorgtest/ci-common/.github/actions/cmake-configure-preset@main
         with:
           config-preset: ${{ inputs.LANGUAGE }}
           cache-version: ${{ inputs.VERSION }}
@@ -144,13 +144,13 @@ jobs:
           cache-auto-depend: 'OFF'
 
       - name: Build the 'gettext_update_po' target
-        uses: ltdorgtest/ci-sphinx/.github/actions/cmake-build-target@main
+        uses: ltdorgtest/ci-common/.github/actions/cmake-build-target@main
         with:
           build-directory: out/build/${{ inputs.LANGUAGE }}
           build-target: 'gettext_update_po'
 
       - name: Build the 'crowdin_download_po' target
-        uses: ltdorgtest/ci-sphinx/.github/actions/cmake-build-target@main
+        uses: ltdorgtest/ci-common/.github/actions/cmake-build-target@main
         with:
           build-directory: out/build/${{ inputs.LANGUAGE }}
           build-target: 'crowdin_download_po'
@@ -161,7 +161,7 @@ jobs:
 
       - name: Get CROWDIN_STATUS_PROGRESS of the '${{ inputs.VERSION }}' branch
         id: gtpp
-        uses: ltdorgtest/ci-sphinx/.github/actions/get-crowdin-status-progress@main
+        uses: ltdorgtest/ci-common/.github/actions/get-crowdin-status-progress@main
         with:
           crowdin-config-file: 'l10n/${{ inputs.VERSION }}/crowdin.yml'
           crowdin-branch-name: ${{ inputs.VERSION }}
@@ -173,7 +173,7 @@ jobs:
           CROWDIN_BASE_URL: ${{ inputs.CROWDIN_BASE_URL }}
 
       - name: Build the 'gettext_statistic_po' target
-        uses: ltdorgtest/ci-sphinx/.github/actions/cmake-build-target@main
+        uses: ltdorgtest/ci-common/.github/actions/cmake-build-target@main
         with:
           build-directory: out/build/${{ inputs.LANGUAGE }}
           build-target: 'gettext_statistic_po'

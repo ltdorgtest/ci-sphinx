@@ -113,23 +113,23 @@ jobs:
           submodules: true
 
       - name: Install CMake
-        uses: ltdorgtest/ci-sphinx/.github/actions/install-cmake@main
+        uses: ltdorgtest/ci-common/.github/actions/install-cmake@main
 
       - name: Install Conda
-        uses: ltdorgtest/ci-sphinx/.github/actions/install-conda@main
+        uses: ltdorgtest/ci-common/.github/actions/install-conda@main
 
       - name: Install Gettext
-        uses: ltdorgtest/ci-sphinx/.github/actions/install-gettext@main
+        uses: ltdorgtest/ci-common/.github/actions/install-gettext@main
 
       - name: Get Other Caches from versions.json
         id: gocv
-        uses: ltdorgtest/ci-sphinx/.github/actions/get-other-caches-from-versions-file@main
+        uses: ltdorgtest/ci-common/.github/actions/get-other-caches-from-versions-file@main
         with:
           version: ${{ inputs.VERSION }}
           versions-file: 'versions.json'
 
       - name: Configure the '${{ inputs.LANGUAGE }}' preset for '${{ inputs.VERSION }}' version
-        uses: ltdorgtest/ci-sphinx/.github/actions/cmake-configure-preset@main
+        uses: ltdorgtest/ci-common/.github/actions/cmake-configure-preset@main
         with:
           config-preset: ${{ inputs.LANGUAGE }}
           cache-version: ${{ inputs.VERSION }}
@@ -140,31 +140,31 @@ jobs:
           cache-sphinx-builder: ${{ inputs.SPHINX_BUILDER }}
 
       - name: Build the 'prepare_repositories' target
-        uses: ltdorgtest/ci-sphinx/.github/actions/cmake-build-target@main
+        uses: ltdorgtest/ci-common/.github/actions/cmake-build-target@main
         with:
           build-directory: out/build/${{ inputs.LANGUAGE }}
           build-target: 'prepare_repositories'
 
       - name: Build the 'install_requirements' target
-        uses: ltdorgtest/ci-sphinx/.github/actions/cmake-build-target@main
+        uses: ltdorgtest/ci-common/.github/actions/cmake-build-target@main
         with:
           build-directory: out/build/${{ inputs.LANGUAGE }}
           build-target: 'install_requirements'
 
       - name: Build the 'sphinx_update_pot' target
-        uses: ltdorgtest/ci-sphinx/.github/actions/cmake-build-target@main
+        uses: ltdorgtest/ci-common/.github/actions/cmake-build-target@main
         with:
           build-directory: out/build/${{ inputs.LANGUAGE }}
           build-target: 'sphinx_update_pot'
 
       - name: Build the 'gettext_update_po' target
-        uses: ltdorgtest/ci-sphinx/.github/actions/cmake-build-target@main
+        uses: ltdorgtest/ci-common/.github/actions/cmake-build-target@main
         with:
           build-directory: out/build/${{ inputs.LANGUAGE }}
           build-target: 'gettext_update_po'
 
       - name: Build the 'sphinx_build_docs' target
-        uses: ltdorgtest/ci-sphinx/.github/actions/cmake-build-target@main
+        uses: ltdorgtest/ci-common/.github/actions/cmake-build-target@main
         with:
           build-directory: out/build/${{ inputs.LANGUAGE }}
           build-target: 'sphinx_build_docs'

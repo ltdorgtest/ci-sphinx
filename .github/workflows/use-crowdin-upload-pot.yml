@@ -132,22 +132,22 @@ jobs:
       #     fi
 
       - name: Install CMake
-        uses: ltdorgtest/ci-sphinx/.github/actions/install-cmake@main
+        uses: ltdorgtest/ci-common/.github/actions/install-cmake@main
 
       - name: Install Gettext
-        uses: ltdorgtest/ci-sphinx/.github/actions/install-gettext@main
+        uses: ltdorgtest/ci-common/.github/actions/install-gettext@main
 
       - name: Install Crowdin
-        uses: ltdorgtest/ci-sphinx/.github/actions/install-crowdin@main
+        uses: ltdorgtest/ci-common/.github/actions/install-crowdin@main
 
       - name: Get Other Caches from versions.json
         id: gocv
-        uses: ltdorgtest/ci-sphinx/.github/actions/get-other-caches-from-versions-file@main
+        uses: ltdorgtest/ci-common/.github/actions/get-other-caches-from-versions-file@main
         with:
           version: ${{ inputs.VERSION }}
 
       - name: Configure the 'all' preset for the '${{ inputs.VERSION }}' version
-        uses: ltdorgtest/ci-sphinx/.github/actions/cmake-configure-preset@main
+        uses: ltdorgtest/ci-common/.github/actions/cmake-configure-preset@main
         with:
           config-preset: 'all'
           cache-version: ${{ inputs.VERSION }}
@@ -155,7 +155,7 @@ jobs:
           cache-auto-depend: 'OFF'
 
       - name: Build the 'crowdin_upload_pot' target
-        uses: ltdorgtest/ci-sphinx/.github/actions/cmake-build-target@main
+        uses: ltdorgtest/ci-common/.github/actions/cmake-build-target@main
         with:
           build-directory: out/build/all
           build-target: 'crowdin_upload_pot'

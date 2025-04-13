@@ -89,16 +89,16 @@ jobs:
           submodules: true
 
       - name: Install CMake
-        uses: ltdorgtest/ci-sphinx/.github/actions/install-cmake@main
+        uses: ltdorgtest/ci-common/.github/actions/install-cmake@main
 
       - name: Configure the 'all' preset for '${{ inputs.VERSION }}' version
-        uses: ltdorgtest/ci-sphinx/.github/actions/cmake-configure-preset@main
+        uses: ltdorgtest/ci-common/.github/actions/cmake-configure-preset@main
         with:
           config-preset: 'all'
           cache-version: ${{ inputs.VERSION }}
 
       - name: Build the 'create_rtd_symlinks' target
-        uses: ltdorgtest/ci-sphinx/.github/actions/cmake-build-target@main
+        uses: ltdorgtest/ci-common/.github/actions/cmake-build-target@main
         with:
           build-directory: out/build/all
           build-target: 'create_rtd_symlinks'
