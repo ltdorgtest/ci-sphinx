@@ -190,9 +190,9 @@ jobs:
           author_name: ${{ inputs.ACTOR_NAME }}
           author_email: ${{ inputs.ACTOR_EMAIL }}
           message: |
-            🌐 pot(${{ inputs.VERSION }}): update .pot from Sphinx
+            :globe_with_meridians: pot(${{ inputs.VERSION }}): update .pot from Sphinx
 
-            updated .pot files for '${{ inputs.VERSION }}' version from Sphinx.
+            update .pot files for '${{ inputs.VERSION }}' version from Sphinx.
 
             before: ${{ steps.pot-before.outputs.VERSION_REFERENCE }}
             after: ${{ steps.pot-after.outputs.VERSION_REFERENCE }}
