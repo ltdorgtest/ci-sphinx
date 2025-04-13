@@ -95,7 +95,7 @@ jobs:
         uses: ltdorgtest/ci-sphinx/.github/actions/cmake-configure-preset@main
         with:
           source-directory: ${{ github.workspace }}
-          preset: 'all'
+          config-preset: 'all'
           cache-version: ${{ inputs.VERSION }}
 
       - name: Build the 'create_rtd_symlinks' target

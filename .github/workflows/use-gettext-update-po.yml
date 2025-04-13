@@ -118,7 +118,7 @@ jobs:
         uses: ltdorgtest/ci-sphinx/.github/actions/cmake-configure-preset@main
         with:
           source-directory: ${{ github.workspace }}
-          preset: ${{ inputs.LANGUAGE }}
+          config-preset: ${{ inputs.LANGUAGE }}
           cache-version: ${{ inputs.VERSION }}
           cache-version-compendium: ${{ steps.gocv.outputs.VERSION_COMPENDIUM }}
           cache-mode-of-update: ${{ inputs.MODE_OF_UPDATE }}

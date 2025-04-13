@@ -11,7 +11,7 @@ inputs:
     default: '${{ github.workspace }}'
     description: >
       The source directory of the CMake project.
-  preset:
+  config-preset:
     required: false
     default: 'all'
     description: >
@@ -124,7 +124,7 @@ runs:
           CMAKE_ARG=""
           if [[ "${KEY}" == "source-directory" ]]; then
             CMAKE_ARG="-S=${VALUE}"
-          elif [[ "${KEY}" == "preset" ]]; then
+          elif [[ "${KEY}" == "config-preset" ]]; then
             CMAKE_ARG="--preset=${VALUE}"
           elif [[ "${KEY}" =~ ^cache- ]]; then
             if [[ "${VALUE}" != "[default]" ]]; then

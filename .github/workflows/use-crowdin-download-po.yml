@@ -138,7 +138,7 @@ jobs:
         uses: ltdorgtest/ci-sphinx/.github/actions/cmake-configure-preset@main
         with:
           source-directory: ${{ github.workspace }}
-          preset: ${{ inputs.LANGUAGE }}
+          config-preset: ${{ inputs.LANGUAGE }}
           cache-version: ${{ inputs.VERSION }}
           cache-version-compendium: ${{ steps.gocv.outputs.VERSION_COMPENDIUM }}
           cache-mode-of-update: ${{ inputs.MODE_OF_UPDATE }}
@@ -147,9 +147,8 @@ jobs:
       - name: Build the 'gettext_update_po' target
         uses: ltdorgtest/ci-sphinx/.github/actions/cmake-build-target@main
         with:
-          source-directory: ${{ github.workspace }}
-          preset: ${{ inputs.LANGUAGE }}
-          target: 'gettext_update_po'
+          build-directory: out/build/${{ inputs.LANGUAGE }}
+          build-target: 'gettext_update_po'
 
       - name: Build the 'crowdin_download_po' target
         uses: ltdorgtest/ci-sphinx/.github/actions/cmake-build-target@main
