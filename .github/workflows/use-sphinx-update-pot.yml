@@ -157,19 +157,36 @@ jobs:
           version: ${{ inputs.VERSION }}
           tms-label: 'crowdin'
 
-      - name: Get the Current Job's ID
-        id: gcji
-        uses: Tiryoh/gha-jobid-action@v1
-        with:
-          github_token: ${{ secrets.ACTOR_GITHUB_TOKEN }}
-          job_name: '${{ inputs.CALLER_JOB }} / ${{ github.job }}'
-          per_page: 100
+      # - name: Get the Current Job's ID
+      #   id: gcji
+      #   uses: Tiryoh/gha-jobid-action@v1
+      #   with:
+      #     github_token: ${{ secrets.ACTOR_GITHUB_TOKEN }}
+      #     job_name: '${{ inputs.CALLER_JOB }} / ${{ github.job }}'
+      #     per_page: 100
 
-      - name: Check Outputs of the Current Job's ID
+      # - name: Check Outputs of the Current Job's ID
+      #   shell: bash
+      #   run: |
+      #     echo "Current Job's URL = ${{ steps.gcji.outputs.html_url }}"
+      #     echo "Current Job's ID  = ${{ steps.gcji.outputs.job_id }}"
+
+      - name: Get the Current Job's Context
+        id: gcjc
+        uses: qoomon/actions--context@v4
+        with:
+          token: ${{ secrets.ACTOR_GITHUB_TOKEN }}
+
+      - name:  Check Outputs of the Current Job's Context
         shell: bash
         run: |
-          echo "Current Job's URL = ${{ steps.gcji.outputs.html_url }}"
-          echo "Current Job's ID  = ${{ steps.gcji.outputs.job_id }}"
+          echo "Job Name:     ${{ steps.gcjc.outputs.job_name }}"
+          echo "Job ID:       ${{ steps.gcjc.outputs.job_id }}"
+          echo "Job URL:      ${{ steps.gcjc.outputs.job_url }}"
+          echo "Run ID:       ${{ steps.gcjc.outputs.run_id }}"
+          echo "Run Attempt:  ${{ steps.gcjc.outputs.run_attempt }}"
+          echo "Run Number:   ${{ steps.gcjc.outputs.run_number }}"
+          echo "Run URL:      ${{ steps.gcjc.outputs.run_url }}"
 
       - name: Set up mutex for 'l10n' branch
         uses: ben-z/gh-action-mutex@v1.0.0-alpha.9
@@ -220,7 +237,7 @@ jobs:
 
             - file: [${{ github.workflow }}](${{ github.server_url }}/${{ github.repository }}/actions/workflows/${{ github.workflow }}.yml)
             - run: [${{ github.workflow }}](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
-            - job: [${{ inputs.CALLER_JOB }} / ${{ github.job }}](${{ steps.gcji.outputs.html_url }})
+            - job: [${{ inputs.CALLER_JOB }} / ${{ github.job }}](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}/job/${{ steps.gcjc.outputs.job_id }})
 
       - name: Check Outputs of the Pull Request
         if: ${{ inputs.CREATE_PR == 'true' && steps.acc.outputs.committed == 'true' }}
