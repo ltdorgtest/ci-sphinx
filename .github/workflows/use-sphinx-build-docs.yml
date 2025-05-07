@@ -41,11 +41,6 @@ on:
         required: true  # [required]
         description: >
           The Sphinx builder used for building documentation.
-      CALLER_JOB:
-        type: string
-        required: true  # [required]
-        description: >
-          The name of the caller job.
       ENABLE_JOB:
         type: string
         required: true  # [required]
@@ -98,7 +93,6 @@ jobs:
           echo "inputs.MODE_OF_UPDATE = ${{ inputs.MODE_OF_UPDATE }}"
           echo "inputs.BASEURL_HREF = ${{ inputs.BASEURL_HREF }}"
           echo "inputs.SPHINX_BUILDER = ${{ inputs.SPHINX_BUILDER }}"
-          echo "inputs.CALLER_JOB = ${{ inputs.CALLER_JOB }}"
           echo "inputs.ENABLE_JOB = ${{ inputs.ENABLE_JOB }}"
           echo "inputs.ACTOR_NAME = ${{ inputs.ACTOR_NAME }}"
           echo "inputs.ACTOR_EMAIL = ${{ inputs.ACTOR_EMAIL }}"

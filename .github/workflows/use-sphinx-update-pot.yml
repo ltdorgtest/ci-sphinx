@@ -26,11 +26,6 @@ on:
         required: true  # [required]
         description: >
           The mode of updating .pot and .po files.
-      CALLER_JOB:
-        type: string
-        required: true  # [required]
-        description: >
-          The name of the job that triggers this workflow call.
       ENABLE_JOB:
         type: string
         required: true  # [required]
@@ -77,7 +72,6 @@ jobs:
           echo "inputs.CHECKOUT = ${{ inputs.CHECKOUT }}"
           echo "inputs.VERSION = ${{ inputs.VERSION }}"
           echo "inputs.MODE_OF_UPDATE = ${{ inputs.MODE_OF_UPDATE }}"
-          echo "inputs.CALLER_JOB = ${{ inputs.CALLER_JOB }}"
           echo "inputs.ENABLE_JOB = ${{ inputs.ENABLE_JOB }}"
           echo "inputs.CREATE_PR = ${{ inputs.CREATE_PR }}"
           echo "inputs.ACTOR_NAME = ${{ inputs.ACTOR_NAME }}"
@@ -157,20 +151,6 @@ jobs:
           version: ${{ inputs.VERSION }}
           tms-label: 'crowdin'
 
-      # - name: Get the Current Job's ID
-      #   id: gcji
-      #   uses: Tiryoh/gha-jobid-action@v1
-      #   with:
-      #     github_token: ${{ secrets.ACTOR_GITHUB_TOKEN }}
-      #     job_name: '${{ inputs.CALLER_JOB }} / ${{ github.job }}'
-      #     per_page: 100
-
-      # - name: Check Outputs of the Current Job's ID
-      #   shell: bash
-      #   run: |
-      #     echo "Current Job's URL = ${{ steps.gcji.outputs.html_url }}"
-      #     echo "Current Job's ID  = ${{ steps.gcji.outputs.job_id }}"
-
       - name: Get the Current Job's Context
         id: gcjc
         uses: qoomon/actions--context@v4
@@ -237,7 +217,7 @@ jobs:
 
             - file: [${{ github.workflow }}](${{ github.server_url }}/${{ github.repository }}/actions/workflows/${{ github.workflow }}.yml)
             - run: [${{ github.workflow }}](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
-            - job: [${{ inputs.CALLER_JOB }} / ${{ github.job }}](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}/job/${{ steps.gcjc.outputs.job_id }})
+            - job: [${{ steps.gcjc.outputs.job_name }}](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}/job/${{ steps.gcjc.outputs.job_id }})
 
       - name: Check Outputs of the Pull Request
         if: ${{ inputs.CREATE_PR == 'true' && steps.acc.outputs.committed == 'true' }}
