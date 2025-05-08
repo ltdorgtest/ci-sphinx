@@ -157,7 +157,7 @@ jobs:
         with:
           token: ${{ secrets.ACTOR_GITHUB_TOKEN }}
 
-      - name:  Check Outputs of the Current Job's Context
+      - name: Check Outputs of the Current Job's Context
         shell: bash
         run: |
           echo "Job Name:     ${{ steps.gcjc.outputs.job_name }}"
@@ -213,9 +213,9 @@ jobs:
           title: |
             🌐 pot(${{ inputs.VERSION }}): update .pot from sphinx
           body: |
-            created by the GitHub Workflow:
+            Created by the GitHub Actions:
 
-            - file: ${{ github.server_url }}/${{ github.repository }}/actions/workflows/${{ github.workflow }}.yml
+            - workflow: ${{ github.server_url }}/${{ github.repository }}/actions/workflows/${{ github.workflow }}.yml
             - run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
             - job: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}/job/${{ steps.gcjc.outputs.job_id }}
 
