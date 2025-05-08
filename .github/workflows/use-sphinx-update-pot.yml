@@ -215,9 +215,9 @@ jobs:
           body: |
             created by the GitHub Workflow:
 
-            - file: [${{ github.workflow }}](${{ github.server_url }}/${{ github.repository }}/actions/workflows/${{ github.workflow }}.yml)
-            - run: [${{ github.workflow }}](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
-            - job: [${{ steps.gcjc.outputs.job_name }}](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}/job/${{ steps.gcjc.outputs.job_id }})
+            - file: ${{ github.server_url }}/${{ github.repository }}/actions/workflows/${{ github.workflow }}.yml
+            - run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+            - job: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}/job/${{ steps.gcjc.outputs.job_id }}
 
       - name: Check Outputs of the Pull Request
         if: ${{ inputs.CREATE_PR == 'true' && steps.acc.outputs.committed == 'true' }}
