@@ -114,10 +114,10 @@ jobs:
 
       - name: Get VERSION_REFERENCE of '.pot' Before Building
         id: pot-before
-        uses: ltdorgtest/ci-common/.github/actions/get-version-ref-from-references-file@main
+        uses: ltdorgtest/ci-common/.github/actions/get-version-reference-from-references-file@main
         with:
           jq-filter: '.pot'
-          jq-file: 'l10n/${{ inputs.VERSION }}/references.json'
+          references-file: 'l10n/${{ inputs.VERSION }}/references.json'
 
       - name: Build the 'prepare_repositories' target
         uses: ltdorgtest/ci-common/.github/actions/cmake-build-target@main
@@ -139,10 +139,10 @@ jobs:
 
       - name: Get VERSION_REFERENCE of '.pot' After Building
         id: pot-after
-        uses: ltdorgtest/ci-common/.github/actions/get-version-ref-from-references-file@main
+        uses: ltdorgtest/ci-common/.github/actions/get-version-reference-from-references-file@main
         with:
           jq-filter: '.pot'
-          jq-file: 'l10n/${{ inputs.VERSION }}/references.json'
+          references-file: 'l10n/${{ inputs.VERSION }}/references.json'
 
       - name: Get PULL_REQUEST_LABEL_LIST from versions.json
         id: gllpr
