@@ -98,6 +98,7 @@ jobs:
           echo "inputs.MODE_OF_UPDATE = ${{ inputs.MODE_OF_UPDATE }}"
           echo "inputs.BASEURL_HREF = ${{ inputs.BASEURL_HREF }}"
           echo "inputs.SPHINX_BUILDER = ${{ inputs.SPHINX_BUILDER }}"
+          echo "inputs.DEPLOY_PAGES = ${{ inputs.DEPLOY_PAGES }}"
           echo "inputs.ENABLE_JOB = ${{ inputs.ENABLE_JOB }}"
           echo "inputs.ACTOR_NAME = ${{ inputs.ACTOR_NAME }}"
           echo "inputs.ACTOR_EMAIL = ${{ inputs.ACTOR_EMAIL }}"
