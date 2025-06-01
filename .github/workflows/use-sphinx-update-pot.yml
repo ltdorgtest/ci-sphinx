@@ -211,9 +211,9 @@ jobs:
           target_branch: l10n
           label: ${{ steps.gllpr.outputs.PULL_REQUEST_LABEL_LIST }}
           title: |
-            🌐 pot(${{ inputs.VERSION }}): update .pot from sphinx
+            🌐 pot(${{ inputs.VERSION }}): update .pot from Sphinx
           body: |
-            Created by the GitHub Actions:
+            created by the GitHub Actions:
 
             - workflow: ${{ github.server_url }}/${{ github.repository }}/actions/workflows/${{ github.workflow }}.yml
             - run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
